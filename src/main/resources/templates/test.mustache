@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Analyser</title>
+</head>
+<body>
+
+    <div>
+        <p>Add new currency</p>
+        <form method="post">
+            <input type="text" name="id" placeholder="Currency Id" />
+            <input type="text" name="code" placeholder="Symbol code" />
+            <input type="text" name="name" placeholder="Currency name" />
+            <button type="submit">Add</button>
+        </form>
+    </div>
+
+    <br>
+    <h2><div>Currencies</div></h2>
+    {{#currencies}}
+    <div>
+        <b>{{id}}</b>
+        <span>{{code}}</span>
+        <b>{{name}}</b>
+    </div>
+    {{/currencies}}
+
+    <br>
+    <div>
+        <p>Add new currencies rate</p>
+        <form method="post" action="addRate">
+            <input type="text" name="date" placeholder="dateTime" />
+            <input type="text" name="code" placeholder="Currency code" />
+            <input type="text" name="rate" placeholder="Currency rate" />
+            <input type="text" name="multiplicity" placeholder="Currency multiplicity" />
+            <button type="submit">Add rate</button>
+        </form>
+    </div>
+
+    <br>
+    <br>
+    <h3><div>Currency rates</div></h3>
+    {{#currencyRates}}
+    <div>
+        <b>{{date}}</b>
+        <span>{{currency.code}}</span>
+        <b>{{rate}}</b>
+        <b>{{multiplicity}}</b>
+    </div>
+    {{/currencyRates}}
+
+</body>
+</html>
