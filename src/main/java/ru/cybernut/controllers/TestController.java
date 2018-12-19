@@ -70,13 +70,14 @@ public class TestController {
 
     @PostMapping
     public String add(@RequestParam Long id, @RequestParam String code, @RequestParam String name, Map<String, Object> model) {
-        Currency currency = new Currency(id, name, code);
-        currencyRepositories.save(currency);
-
+        Currency currency;
+        if(!currencyRepositories.findById(id).isPresent()) {
+            currency = new Currency(id, name, code);
+            currencyRepositories.save(currency);
+        }
         Iterable<Currency> currencies = currencyRepositories.findAll();
         model.put("currencies", currencies);
-
-        return "main";
+        return "currencies";
     }
 
     @PostMapping("addRate")
@@ -92,17 +93,15 @@ public class TestController {
         }
 
         if(currency != null) {
-
             CurrencyRate currencyRate = new CurrencyRate(currency, date, rate, multiplicity);
             currencyRatesRepository.save(currencyRate);
         }
-
         Iterable<Currency> currencies = currencyRepositories.findAll();
         Iterable<CurrencyRate> currencyRates = currencyRatesRepository.findAll();
         model.put("currencies", currencies);
         model.put("currencyRates", currencyRates);
 
-        return "main";
+        return "currencies";
     }
 
 }

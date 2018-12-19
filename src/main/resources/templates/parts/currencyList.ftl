@@ -1,24 +1,55 @@
 <#macro currencyList>
     <h2>Currencies</h2>
-    <#list currencies as currency>
-        <div>
-            <b>${currency.id}</b>
-            <span>${currency.code}</span>
-            <b>${currency.name}</b>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <b>Currency</b>
+            </div>
+            <div class="col-sm">
+                <b>Code</b>
+            </div>
+            <div class="col-sm">
+                <b>Number</b>
+            </div>
         </div>
-    <#else>
-    <b>No currencies</b>
-    </#list>
+        <#list currencies as currency>
+            <div class="row">
+                <div class="col-sm">${currency.name}</div>
+                <div class="col-sm">${currency.code}</div>
+                <div class="col-sm">${currency.id}</div>
+            </div>
+        <#else>
+        <b>No currencies</b>
+        </#list>
+    </div>
 </#macro>
 
 <#macro rates>
     <h3>Currency rates</h3>
-    <#list currencyRates as currencyRate>
-        <div>
-            <b>${currencyRate.date}</b>
-            <span>${currencyRate.currency.code}</span>
-            <b>${currencyRate.rate}</b>
-            <b>${currencyRate.multiplicity}</b>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <b>Date</b>
+            </div>
+            <div class="col-sm">
+                <b>Currency</b>
+            </div>
+            <div class="col-sm">
+                <b>Rate</b>
+            </div>
+            <div class="col-sm">
+                <b>Multiplicity</b>
+            </div>
         </div>
-    </#list>
+        <#list currencyRates as currencyRate>
+            <div class="row">
+                <div class="col-sm">${currencyRate.date}</div>
+                <div class="col-sm">${currencyRate.currency.code}</div>
+                <div class="col-sm">${currencyRate.rate}</div>
+                <div class="col-sm">${currencyRate.multiplicity}</div>
+            </div>
+        <#else>
+        <b>No rates</b>
+        </#list>
+    </div>
 </#macro>
