@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <title>Analyser</title>
-</head>
-<body>
+<#import "parts/common.ftl" as c>
+<#import "parts/currencyList.ftl" as cl>
 
+<@c.page>
+    <@cl.currencyList/>
     <div>
         <p>Add new currency</p>
         <form method="post">
@@ -14,18 +12,9 @@
             <button type="submit">Add</button>
         </form>
     </div>
-
     <br>
-    <h2><div>Currencies</div></h2>
-    {{#currencies}}
-    <div>
-        <b>{{id}}</b>
-        <span>{{code}}</span>
-        <b>{{name}}</b>
-    </div>
-    {{/currencies}}
-
     <br>
+    <@cl.rates/>
     <div>
         <p>Add new currencies rate</p>
         <form method="post" action="addRate">
@@ -36,18 +25,4 @@
             <button type="submit">Add rate</button>
         </form>
     </div>
-
-    <br>
-    <br>
-    <h3><div>Currency rates</div></h3>
-    {{#currencyRates}}
-    <div>
-        <b>{{date}}</b>
-        <span>{{currency.code}}</span>
-        <b>{{rate}}</b>
-        <b>{{multiplicity}}</b>
-    </div>
-    {{/currencyRates}}
-
-</body>
-</html>
+</@c.page>

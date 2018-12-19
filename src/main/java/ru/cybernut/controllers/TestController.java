@@ -2,14 +2,17 @@ package ru.cybernut.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.cybernut.domain.Currency;
 import ru.cybernut.domain.CurrencyRate;
+import ru.cybernut.domain.Stock;
+import ru.cybernut.domain.TradeIdea;
 import ru.cybernut.repositories.CurrencyRatesRepository;
 import ru.cybernut.repositories.CurrencyRepositories;
+import ru.cybernut.repositories.StockRepository;
+import ru.cybernut.repositories.TradeIdeasRepository;
 
 import java.util.List;
 import java.util.Map;
@@ -21,10 +24,16 @@ public class TestController {
     private CurrencyRepositories currencyRepositories;
     @Autowired
     private CurrencyRatesRepository currencyRatesRepository;
+    @Autowired
+    private StockRepository stocksRepository;
+    @Autowired
+    private TradeIdeasRepository ideasRepository;
+
     @GetMapping("/test")
+
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Map<String, Object> model) {
         model.put("name", name);
-        return "test";
+        return "main";
     }
 
     @GetMapping
@@ -33,7 +42,30 @@ public class TestController {
         Iterable<CurrencyRate> currencyRates = currencyRatesRepository.findAll();
         model.put("currencies", currencies);
         model.put("currencyRates", currencyRates);
-        return "test";
+        return "main";
+    }
+
+    @GetMapping("/currencies")
+    public String currenciesPage(Map<String, Object> model) {
+        Iterable<Currency> currencies = currencyRepositories.findAll();
+        Iterable<CurrencyRate> currencyRates = currencyRatesRepository.findAll();
+        model.put("currencies", currencies);
+        model.put("currencyRates", currencyRates);
+        return "currencies";
+    }
+
+    @GetMapping("/stocks")
+    public String stocksPage(Map<String, Object> model) {
+        Iterable<Stock> stocks = stocksRepository.findAll();
+        model.put("stocks", stocks);
+        return "stocks";
+    }
+
+    @GetMapping("/ideas")
+    public String ideasPage(Map<String, Object> model) {
+        Iterable<TradeIdea> ideas = ideasRepository.findAll();
+        model.put("ideas", ideas);
+        return "ideas";
     }
 
     @PostMapping
@@ -44,7 +76,7 @@ public class TestController {
         Iterable<Currency> currencies = currencyRepositories.findAll();
         model.put("currencies", currencies);
 
-        return "test";
+        return "main";
     }
 
     @PostMapping("addRate")
@@ -70,7 +102,7 @@ public class TestController {
         model.put("currencies", currencies);
         model.put("currencyRates", currencyRates);
 
-        return "test";
+        return "main";
     }
 
 }
