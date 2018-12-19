@@ -1,4 +1,4 @@
-package ru.cybernut;
+package ru.cybernut.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
